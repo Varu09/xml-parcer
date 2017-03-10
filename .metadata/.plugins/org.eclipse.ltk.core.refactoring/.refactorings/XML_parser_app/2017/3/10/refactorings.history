@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;myPackage.SAXParcer&apos; to &apos;MySAXParcer&apos;&#x0D;&#x0A;- Original project: &apos;XML_parser_app&apos;&#x0D;&#x0A;- Original element: &apos;myPackage.SAXParcer&apos;&#x0D;&#x0A;- Renamed element: &apos;myPackage.MySAXParcer&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SAXParcer&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;myPackage{SAXParcer.java[SAXParcer" matchStrategy="1" name="MySAXParcer" qualified="false" references="true" similarDeclarations="false" stamp="1489164634208" textual="false" version="1.0"/>
+</session>

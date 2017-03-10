@@ -1,0 +1,48 @@
+package myPackage;
+
+import java.io.IOException;
+import java.io.StringWriter;
+
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+
+public class MyStAXCreator {
+
+	public static void main(String[] args) {
+	
+		try {
+			StringWriter stringWriter = new StringWriter();
+
+	        XMLOutputFactory xMLOutputFactory = XMLOutputFactory.newInstance();	
+	        XMLStreamWriter xMLStreamWriter = xMLOutputFactory.createXMLStreamWriter(stringWriter);
+			
+	        xMLStreamWriter.writeStartDocument();
+	        xMLStreamWriter.writeStartElement("products");
+	        
+	        xMLStreamWriter.writeStartElement("product");
+	        
+	        xMLStreamWriter.writeStartElement("description");
+	        xMLStreamWriter.writeCharacters("Sony 54.6'' (Diag) Xbr Hx929 Internet Tv");
+	        xMLStreamWriter.writeEndElement();
+	        
+	        xMLStreamWriter.writeStartElement("gtin");
+	        xMLStreamWriter.writeCharacters("00027242816657");
+	        xMLStreamWriter.writeEndElement();
+	        
+	        xMLStreamWriter.writeStartElement("price");
+	        xMLStreamWriter.writeAttribute("currency", "USD");
+	        xMLStreamWriter.writeCharacters("00027242816657");
+	        xMLStreamWriter.writeEndElement();
+
+	        
+	        
+		  }	catch (XMLStreamException e) {
+	         e.printStackTrace();
+	      } catch (IOException e) {	         
+	         e.printStackTrace();
+	      }
+
+	}
+
+}
