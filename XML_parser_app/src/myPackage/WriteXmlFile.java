@@ -38,6 +38,12 @@ public class WriteXmlFile {
             pce.printStackTrace();
         }
     }
+	
+	/**
+	*	In progress...
+	* 	Trebuie sa mai lucrez la asta pt ca am gasit-o pe net
+	* 	si este doar de test 
+	*/
 
     public void createFile (Node product) {
 
