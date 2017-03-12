@@ -6,12 +6,14 @@ import java.util.*;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class MyDOMParcer {
 	public static void main(String[] args) {
@@ -21,17 +23,16 @@ public class MyDOMParcer {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(inputFile);
-	
 
 			System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 			HashMap<String, List<Product>> productMap = new HashMap<>();
 			NodeList orders = doc.getElementsByTagName("order");
 			
-			for(int i = 0; i < orders.getLength(); i++) {
+			for(int i=0; i<orders.getLength(); i++) {
 				Node order = orders.item(i);
 				NodeList productsElem = order.getChildNodes();
 				
-				for(int j = 0; j < productsElem.getLength(); j++) {
+				for(int j=0;j<productsElem.getLength();j++){
 					Node productElement = productsElem.item(j);
 					
 					if(productElement.getNodeType() == Node.ELEMENT_NODE) {
@@ -53,13 +54,8 @@ public class MyDOMParcer {
 					}
 				}
 			}
-			
+
 			//sortProducts(products);
-			System.out.println("----------------------------\n");
-			
-					
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

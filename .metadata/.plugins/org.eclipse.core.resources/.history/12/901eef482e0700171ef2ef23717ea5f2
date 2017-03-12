@@ -88,7 +88,7 @@ public class WriteXmlFile {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(fileName));
 
-            //StreamResult result = new StreamResult(new File("file.xml"));
+                //StreamResult result = new StreamResult(new File("C:/Users/Dragos/Desktop/parser/Xml-parcer/XML_parser_app/file.xml"));
 
             // Output to console for testing
             // StreamResult result = new StreamResult(System.out);

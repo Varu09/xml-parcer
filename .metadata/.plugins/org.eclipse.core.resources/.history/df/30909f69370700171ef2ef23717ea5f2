@@ -57,7 +57,20 @@ public class MyDOMParcer {
 			//sortProducts(products);
 			System.out.println("----------------------------\n");
 			
+			for(int i = 0; i < orders.getLength(); i++) {
+				Node order = orders.item(i);
+				NodeList productsElem = order.getChildNodes();
+				
+				for(int j = 0; j < productsElem.getLength(); j++) {
+					Node productElement = productsElem.item(j);
 					
+					if(productElement.getNodeType() == Node.ELEMENT_NODE) {
+						Product product = new Product(productElement, order);
+						System.out.println(productMap);
+					}
+				}
+			}
+						
 			
 			
 		} catch (Exception e) {

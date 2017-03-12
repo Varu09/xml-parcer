@@ -55,10 +55,6 @@ public class MyDOMParcer {
 			}
 			
 			//sortProducts(products);
-			System.out.println("----------------------------\n");
-			
-					
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
