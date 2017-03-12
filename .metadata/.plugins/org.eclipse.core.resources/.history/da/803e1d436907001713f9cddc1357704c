@@ -1,0 +1,15 @@
+package myPackage;
+
+public class ParseUtils {
+
+	public static Node getNode(String tagName, NodeList nodes) {
+	    for ( int x = 0; x < nodes.getLength(); x++ ) {
+	        Node node = nodes.item(x);
+	        if (node.getNodeName().equalsIgnoreCase(tagName)) {
+	            return node;
+	        }
+	    }
+	 
+	    return null;
+	}
+}

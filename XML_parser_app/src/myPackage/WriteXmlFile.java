@@ -1,6 +1,8 @@
 package myPackage;
 
 import java.io.File;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +17,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class WriteXmlFile {
 
@@ -39,57 +42,32 @@ public class WriteXmlFile {
         }
     }
 	
-	/**
-	*	In progress...
-	* 	Trebuie sa mai lucrez la asta pt ca am gasit-o pe net
-	* 	si este doar de test 
-	*/
+	
 
-    public void createFile (Node product) {
+    public void createFile (List<Product> products) {
 
 
-            try{
+            try {           	
+            	
+            for(Product product : products){
+            	Node productElement =  product.productElement.cloneNode(true);
+            	doc.adoptNode(productElement);
+              	Node supplier = ParseUtils.getNode("supplier", productElement.getChildNodes());
+            	Element orderId = doc.createElement("orderid");
+            	orderId.appendChild(doc.createTextNode(product.orderId));
+            	productElement.replaceChild(orderId, supplier);
+            	rootElement.appendChild(productElement);
+            }
 
-            // staff elements
-            Element staff = doc.createElement("Staff");
-            rootElement.appendChild(staff);
-
-            // set attribute to staff element
-            Attr attr = doc.createAttribute("id");
-            attr.setValue("1");
-            staff.setAttributeNode(attr);
-
-            // shorten way
-            // staff.setAttribute("id", "1");
-
-            // firstname elements
-            Element firstname = doc.createElement("firstname");
-            firstname.appendChild(doc.createTextNode("yong"));
-            staff.appendChild(firstname);
-
-            // lastname elements
-            Element lastname = doc.createElement("lastname");
-            lastname.appendChild(doc.createTextNode("mook kim"));
-            staff.appendChild(lastname);
-
-            // nickname elements
-            Element nickname = doc.createElement("nickname");
-            nickname.appendChild(doc.createTextNode("mkyong"));
-            staff.appendChild(nickname);
-
-            // salary elements
-            Element salary = doc.createElement("salary");
-            salary.appendChild(doc.createTextNode("100000"));
-            staff.appendChild(salary);
 
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(fileName));
+            StreamResult result = new StreamResult(new File("outputs/" + fileName));
+            
 
             //StreamResult result = new StreamResult(new File("file.xml"));
-
             // Output to console for testing
             // StreamResult result = new StreamResult(System.out);
 
@@ -97,8 +75,8 @@ public class WriteXmlFile {
 
             System.out.println("File saved!");
 
-            } catch (TransformerException tfe) {
-                tfe.printStackTrace();
+            } catch (TransformerException e) {
+                e.printStackTrace();
             }
     }
 }
