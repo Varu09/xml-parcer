@@ -3,6 +3,12 @@ package myPackage;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * This class contains simple methods for parsing XML.
+ * 
+ * @author Grajdan Ioan Alexandru 
+ *
+ */
 public class ParseUtils {
 
 	public static Node getNode(String tagName, NodeList nodes) {
@@ -16,7 +22,7 @@ public class ParseUtils {
 	    return null;
 	}
 	
-	protected String getNodeValue( Node node ) {
+	public static String getNodeValue( Node node ) {
 	    NodeList childNodes = node.getChildNodes();
 	    for (int x = 0; x < childNodes.getLength(); x++ ) {
 	        Node data = childNodes.item(x);

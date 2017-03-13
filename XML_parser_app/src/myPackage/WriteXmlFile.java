@@ -19,26 +19,39 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * This is the method that generates XML files.
+ * The core function is createFile which receives a product list.
+ * In the first part the function loops on all products and for 
+ * each of them it clones the product element and it replaces
+ * the supplier element, from the original XML, with order ID.
+ * The second part it simply writes the content saved into XML
+ * file.
+ * 
+ * @author Grajdan Ioan Alexandru 
+ *
+ */
 public class WriteXmlFile {
 
-    DocumentBuilderFactory docFactory;
-    DocumentBuilder docBuilder;
-    String fileName;
-    Document doc;
-    Element rootElement;
+   public DocumentBuilderFactory docFactory;
+   public DocumentBuilder docBuilder;
+   public String fileName;
+   public Document doc;
+   public Element rootElement;
 
     public WriteXmlFile(String fileName) {
         try {
         docFactory = DocumentBuilderFactory.newInstance();
         docBuilder = docFactory.newDocumentBuilder();
+        
             // root elements
             doc = docBuilder.newDocument();
             rootElement = doc.createElement("products");
             doc.appendChild(rootElement);
             this.fileName = fileName;
 
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
         }
     }
 	
@@ -50,11 +63,11 @@ public class WriteXmlFile {
             try {           	
             	
             for(Product product : products){
-            	Node productElement =  product.productElement.cloneNode(true);
+            	Node productElement =  product.getProductElement().cloneNode(true);
             	doc.adoptNode(productElement);
               	Node supplier = ParseUtils.getNode("supplier", productElement.getChildNodes());
             	Element orderId = doc.createElement("orderid");
-            	orderId.appendChild(doc.createTextNode(product.orderId));
+            	orderId.appendChild(doc.createTextNode(product.getOrderId()));
             	productElement.replaceChild(orderId, supplier);
             	rootElement.appendChild(productElement);
             }
@@ -64,13 +77,10 @@ public class WriteXmlFile {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
+            
+            // saves the file in the directory 
             StreamResult result = new StreamResult(new File("outputs/" + fileName));
             
-
-            //StreamResult result = new StreamResult(new File("file.xml"));
-            // Output to console for testing
-            // StreamResult result = new StreamResult(System.out);
-
             transformer.transform(source, result);
 
             System.out.println("File saved!");
