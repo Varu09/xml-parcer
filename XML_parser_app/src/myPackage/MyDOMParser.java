@@ -78,7 +78,7 @@ public class MyDOMParser {
 			
 			public int compare(Product p1, Product p2){
 				int comparator = p2.getCreatedDate().compareTo(p1.getCreatedDate());
-				return comparator != 0 ? comparator : p1.getPrice().compareTo(p1.getPrice());
+				return comparator != 0 ? comparator : p2.getPrice().compareTo(p1.getPrice());
 			}
 		});
 	}
